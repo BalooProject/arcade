@@ -3147,6 +3147,13 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	{
 		section: "National Dex",
 	},
+
+	{
+	name: "[Gen 9] Arcade SSB",
+	mod: 'arcade',
+	ruleset: ['Standard NatDex', 'Terastal Clause'],
+	banlist: [],
+},
 	{
 		name: "[Gen 9] National Dex",
 		mod: 'gen9',
