@@ -162,6 +162,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		ruleset: ['Team Preview', 'Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
 	},
 
+
 	// S/V Doubles
 	///////////////////////////////////////////////////////////////////
 
@@ -978,6 +979,15 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			}
 		},
 	},
+	{
+	name: "[Gen 9] Arcade",
+	effectType: 'Format',
+	mod: 'arcade',
+	searchShow: true,
+	debug: true,
+	battle: { trunc: Math.trunc },
+	ruleset: ['Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+},
 	{
 		name: "[Gen 9] Pokebilities AAA",
 		desc: `Pok&eacute;mon have all of their released abilities simultaneously, as well as one ability they cannot normally use.`,
@@ -3148,12 +3158,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		section: "National Dex",
 	},
 
-	{
-	name: "[Gen 9] Arcade SSB",
-	mod: 'arcade',
-	ruleset: ['Standard NatDex', 'Terastal Clause'],
-	banlist: [],
-},
+
 	{
 		name: "[Gen 9] National Dex",
 		mod: 'gen9',
