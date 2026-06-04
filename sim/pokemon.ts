@@ -1451,7 +1451,9 @@ export class Pokemon {
 				// Ogerpon/Terapagos text goes here
 				this.formeRegression = true;
 			} else if (source.effectType === 'Item') {
-				this.canTerastallize = null; // National Dex behavior
+				if (this.battle.format.mod !== 'arcade') {
+					this.canTerastallize = null; // National Dex behavior
+				}
 				if (source.zMove) {
 					this.battle.add('-burst', this, apparentSpecies, species.requiredItem);
 					this.moveThisTurnResult = true; // Ultra Burst counts as an action for Truant
