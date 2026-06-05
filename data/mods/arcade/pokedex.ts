@@ -1,0 +1,27 @@
+export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
+	oshawottmega: {
+		num: -1002,
+		name: "Oshawott-Mega",
+		baseSpecies: "Oshawott",
+		forme: "Mega",
+		types: ["Water", "Fighting"],
+		genderRatio: {M: 0.875, F: 0.125},
+		baseStats: {
+			hp: 55,
+			atk: 135,
+			def: 110,
+			spa: 93,
+			spd: 110,
+			spe: 125,
+		},
+		abilities: {0: "Sharpness"},
+		heightm: 0.7,
+		weightkg: 15,
+		color: "Blue",
+		eggGroups: ["Field"],
+		requiredItem: "Moustillonite",
+		battleOnly: "Oshawott",
+		isMega: true,
+		isNonstandard: null,
+	},
+};

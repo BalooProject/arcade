@@ -15,4 +15,18 @@ export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 		gen: 9,
 		shortDesc: "If held by Pikachu, its Attack is multiplied by 1.3.",
 	},
+	moustillonite: {
+		name: "Moustillonite",
+		spritenum: 578,
+		megaStone: {
+			Oshawott: "Oshawott-Mega",
+		},
+		itemUser: ["Oshawott"],
+		onTakeItem: false,
+		num: -1002,
+		gen: 9,
+		isNonstandard: null,
+		shortDesc: "If held by Oshawott, this item allows it to Mega Evolve in battle.",
+	},
+
 };
