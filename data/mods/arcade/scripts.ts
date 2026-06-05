@@ -34,16 +34,19 @@ export const Scripts: ModdedBattleScriptsData = {
 		runMegaEvo(pokemon) {
 			if (pokemon.species.isMega) return false;
 
+                        const originalSpeciesName = pokemon.m.originalSpecies || pokemon.baseSpecies.name;
+
 			const species: Species = (this as any).getMixedSpecies(
-				pokemon.m.originalSpecies,
+				originalSpeciesName,
 				pokemon.canMegaEvo,
 				pokemon
 			);
 
-			const oSpecies = this.dex.species.get(pokemon.m.originalSpecies);
+			const oSpecies = this.dex.species.get(originalSpeciesName);
 			const oMegaSpecies = this.dex.species.get((species as any).originalSpecies);
 
 			pokemon.formeChange(species, pokemon.getItem(), true);
+
 			this.battle.add('-start', pokemon, oMegaSpecies.requiredItem, '[silent]');
 
 			if (!pokemon.terastallized && oSpecies.types.join('/') !== pokemon.species.types.join('/')) {
