@@ -1,7 +1,14 @@
 export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
 	arcadedarkmask: {
 		name: "Arcade Dark Mask",
-		shortDesc: "Forces Dark Tera Type. Adds/replaces Dark typing. Gives Sniper. On Tera, becomes Special Aspect and gains +1 Sp. Atk.",
+		shortDesc: "Forces Dark Tera Type. Adds/replaces Dark typing. Gives Sniper. Moves have 1.2x BP. On Tera, becomes Special Aspect and gains +1 Sp. Atk.",
+		onBasePowerPriority: 15,
+		onBasePower(basePower: number, user: any, target: any, move: any) {
+			const item = user.getItem() as any;
+			if (item.arcadeMaskType) {
+				return this.chainModify([4915, 4096]);
+			}
+		},
 		onTakeItem: false,
 		itemUser: ["Ogerpon"],
 		num: -1003,
