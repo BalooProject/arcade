@@ -987,6 +987,61 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 	debug: true,
 	battle: { trunc: Math.trunc },
 	ruleset: ['Cancel Mod', 'Max Team Size = 24', 'Max Move Count = 24', 'Max Level = 9999', 'Default Level = 100'],
+
+		// Arcade custom mask validation
+		onValidateSet(set) {
+			const item = this.dex.items.get(set.item) as any;
+			const maskType = item.arcadeMaskType;
+			if (!maskType || !item.arcadeMaskForceTera) return;
+
+			if (set.teraType && set.teraType !== maskType) {
+				return [`${set.name || set.species}'s Tera Type must be ${maskType} because it is holding ${item.name}.`];
+			}
+
+			set.teraType = maskType;
+		},
+		// Arcade custom mask type/ability application
+		onSwitchIn(pokemon) {
+			const item = pokemon.getItem() as any;
+			const maskType = item.arcadeMaskType;
+			if (!maskType) return;
+
+			if (item.arcadeMaskChangeTypes && !pokemon.terastallized) {
+				const currentTypes = pokemon.getTypes();
+				let newTypes: string[] | null = null;
+
+				if (currentTypes.length <= 1) {
+					if (!currentTypes.includes(maskType)) {
+						newTypes = [currentTypes[0], maskType];
+					}
+				} else {
+					if (currentTypes[0] === maskType) {
+						newTypes = [currentTypes[0]];
+					} else {
+						newTypes = [currentTypes[0], maskType];
+					}
+				}
+
+				if (newTypes) {
+					pokemon.setType(newTypes);
+					this.add('-start', pokemon, 'typechange', newTypes.join('/'), '[from]item: ' + item.name);
+				}
+			}
+
+			const targetAbility = pokemon.terastallized ?
+				item.arcadeMaskTeraAbility :
+				item.arcadeMaskPreTeraAbility;
+
+			if (targetAbility && pokemon.getAbility().id !== this.dex.toID(targetAbility)) {
+				pokemon.setAbility(targetAbility, pokemon, item);
+			}
+		},
+
+		onBegin() {
+			for (const pokemon of this.getAllPokemon()) {
+				(this.format as any).onSwitchIn.call(this, pokemon);
+			}
+		},
 },
 	{
 		name: "[Gen 9] Pokebilities AAA",

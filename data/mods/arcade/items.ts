@@ -1,4 +1,21 @@
 export const Items: import('../../../sim/dex-items').ModdedItemDataTable = {
+	arcadedarkmask: {
+		name: "Arcade Dark Mask",
+		shortDesc: "Forces Dark Tera Type. Adds/replaces Dark typing. Gives Sniper. On Tera, becomes Special Aspect and gains +1 Sp. Atk.",
+		onTakeItem: false,
+		itemUser: ["Ogerpon"],
+		num: -1003,
+		gen: 9,
+		isNonstandard: null,
+
+		// Arcade custom mask fields
+		arcadeMaskType: "Dark",
+		arcadeMaskForceTera: true,
+		arcadeMaskChangeTypes: true,
+		arcadeMaskPreTeraAbility: "sniper",
+		arcadeMaskTeraAbility: "arcadespecialaspect",
+	} as any,
+
 	arcadeorb: {
 		name: "Arcade Orb",
 		spritenum: 0,

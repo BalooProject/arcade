@@ -68,6 +68,62 @@ export const Scripts: ModdedBattleScriptsData = {
 			return true;
 		},
 
+		terastallize(pokemon) {
+
+			if (pokemon.illusion?.species.baseSpecies === 'Ogerpon') {
+
+				this.battle.singleEvent('End', this.dex.abilities.get('Illusion'), pokemon.abilityState, pokemon);
+
+			}
+
+			if (pokemon.illusion?.species.baseSpecies === 'Terapagos') {
+
+				this.battle.singleEvent('End', this.dex.abilities.get('Illusion'), pokemon.abilityState, pokemon);
+
+			}
+
+
+			const type = pokemon.teraType;
+
+			this.battle.add('-terastallize', pokemon, type);
+
+			pokemon.terastallized = type;
+
+			for (const ally of pokemon.side.pokemon) {
+
+				ally.canTerastallize = null;
+
+			}
+
+			pokemon.addedType = '';
+
+			pokemon.knownType = true;
+
+			pokemon.apparentType = type;
+
+
+			const item = pokemon.getItem() as any;
+
+			if (item.arcadeMaskType && item.arcadeMaskType === type) {
+
+				const teraAbility = item.arcadeMaskTeraAbility;
+
+				if (teraAbility) {
+
+					pokemon.setAbility(teraAbility, pokemon, item);
+
+
+				}
+
+
+			}
+
+
+			this.battle.runEvent('AfterTerastallization', pokemon);
+
+		},
+
+
 		getMixedSpecies(originalForme, formeChange, pokemon) {
 			const originalSpecies = this.dex.species.get(originalForme);
 			const formeChangeSpecies = this.dex.species.get(formeChange);
